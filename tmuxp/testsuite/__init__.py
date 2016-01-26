@@ -236,7 +236,7 @@ def suite():
 def main():
     """Runs the testsuite as command line application."""
     try:
-        unittest.main(testLoader=BetterLoader(), defaultTest='suite')
+        unittest.main(testLoader=BetterLoader(), defaultTest=str('suite'))
     except Exception:
         import sys
         import traceback
