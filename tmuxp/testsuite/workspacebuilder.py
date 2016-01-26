@@ -649,7 +649,7 @@ class PaneOrderingTest(TmuxTestCase):
       panes:
       - cd /usr/bin
       - cd /usr
-      - cd /usr/sbin
+      - cd /var
       - cd {HOME}
     """.format(
         HOME=os.path.realpath(os.path.expanduser('~'))
@@ -661,7 +661,7 @@ class PaneOrderingTest(TmuxTestCase):
         pane_paths = [
             '/usr/bin',
             '/usr',
-            '/usr/sbin',
+            '/var',
             os.path.realpath(os.path.expanduser('~'))
         ]
 
