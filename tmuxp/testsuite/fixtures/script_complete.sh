@@ -1,4 +1,2 @@
 #!/bin/sh
-
-echo hello
-echo $?    # Exit status 0 returned because command executed successfully.
+exit 0     # Exit status 0 returned because command executed successfully.
