@@ -32,17 +32,19 @@ def run_before_script(script_file):
             shlex.split(str(script_file)),
             stderr=subprocess.PIPE
         )
-        proc.wait()
+        try:
+            proc.wait()
 
-        if proc.returncode:
-            stderr = proc.stderr.read()
+            if proc.returncode:
+                stderr = proc.stderr.read()
+                stderr = console_to_str(stderr).split('\n')
+                stderr = '\n'.join(list(filter(None, stderr)))  # filter empty values
+
+                raise exc.BeforeLoadScriptError(proc.returncode, os.path.abspath(script_file), stderr)
+
+            return proc.returncode
+        finally:
             proc.stderr.close()
-            stderr = console_to_str(stderr).split('\n')
-            stderr = '\n'.join(list(filter(None, stderr)))  # filter empty values
-
-            raise exc.BeforeLoadScriptError(proc.returncode, os.path.abspath(script_file), stderr)
-
-        return proc.returncode
     except OSError as e:
         if e.errno == 2:
             raise exc.BeforeLoadScriptNotExists(e, os.path.abspath(script_file))
