@@ -1024,7 +1024,7 @@ class ConfigConsistency(TestCase):
         sconfig = kaptan.Kaptan(handler='yaml')
         sconfig = sconfig.import_config(yaml_config).get()
 
-        with self.assertRaisesRegexp(
+        with self.assertRaisesRegex(
             exc.ConfigError, 'requires "session_name"'
         ):
             config.validate_schema(sconfig)
@@ -1037,7 +1037,7 @@ class ConfigConsistency(TestCase):
         sconfig = kaptan.Kaptan(handler='yaml')
         sconfig = sconfig.import_config(yaml_config).get()
 
-        with self.assertRaisesRegexp(exc.ConfigError, 'list of "windows"'):
+        with self.assertRaisesRegex(exc.ConfigError, 'list of "windows"'):
             config.validate_schema(sconfig)
 
     def test_no_window_name(self):
@@ -1058,7 +1058,7 @@ class ConfigConsistency(TestCase):
         sconfig = kaptan.Kaptan(handler='yaml')
         sconfig = sconfig.import_config(yaml_config).get()
 
-        with self.assertRaisesRegexp(exc.ConfigError, 'missing "window_name"'):
+        with self.assertRaisesRegex(exc.ConfigError, 'missing "window_name"'):
             config.validate_schema(sconfig)
 
 

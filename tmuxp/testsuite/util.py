@@ -64,7 +64,7 @@ class TmuxVersionTest(TmuxTestCase):
 
     def test_no_arg_uses_tmux_version(self):
         result = has_required_tmux_version()
-        self.assertRegexpMatches(result, r'[0-9]\.[0-9]')
+        self.assertRegex(result, r'[0-9]\.[0-9]')
 
     def test_ignores_letter_versions(self):
         """Ignore letters such as 1.8b.
@@ -76,16 +76,16 @@ class TmuxVersionTest(TmuxTestCase):
 
         """
         result = has_required_tmux_version('1.9a')
-        self.assertRegexpMatches(result, r'[0-9]\.[0-9]')
+        self.assertRegex(result, r'[0-9]\.[0-9]')
 
         result = has_required_tmux_version('1.8a')
         self.assertEqual(result, r'1.8')
 
     def test_error_version_less_1_7(self):
-        with self.assertRaisesRegexp(exc.TmuxpException, 'tmuxp only supports'):
+        with self.assertRaisesRegex(exc.TmuxpException, 'tmuxp only supports'):
             has_required_tmux_version('1.7')
 
-        with self.assertRaisesRegexp(exc.TmuxpException, 'tmuxp only supports'):
+        with self.assertRaisesRegex(exc.TmuxpException, 'tmuxp only supports'):
             has_required_tmux_version('1.6a')
 
         has_required_tmux_version('1.9a')
@@ -119,13 +119,13 @@ class BeforeLoadScriptErrorTestCase(TestCase):
     def test_returncode(self):
         script_file = os.path.join(fixtures_dir, 'script_failed.sh')
 
-        with self.assertRaisesRegexp(exc.BeforeLoadScriptError, "113"):
+        with self.assertRaisesRegex(exc.BeforeLoadScriptError, "113"):
             run_before_script(script_file)
 
     def test_returns_stderr_messages(self):
         script_file = os.path.join(fixtures_dir, 'script_failed.sh')
 
-        with self.assertRaisesRegexp(exc.BeforeLoadScriptError, "failed with returncode"):
+        with self.assertRaisesRegex(exc.BeforeLoadScriptError, "failed with returncode"):
             run_before_script(script_file)
 
 

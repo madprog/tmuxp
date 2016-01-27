@@ -810,7 +810,7 @@ class BeforeLoadScript(TmuxTestCase):
             session_name = sess.get('session_name')
             temp_session_exists = self.server.has_session(sess.get('session_name'))
             self.assertTrue(temp_session_exists)
-            with self.assertRaisesRegexp(
+            with self.assertRaisesRegex(
                 (exc.BeforeLoadScriptNotExists, OSError),
                 'No such file or directory'
             ):
